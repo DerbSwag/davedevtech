@@ -1,0 +1,5 @@
+---
+interface Props { title: string; description: string; category: string; readTime: string; href: string; }
+const { title, description, category, readTime, href } = Astro.props;
+---
+<a class="guide-card" href={href}><div class="guide-meta"><span>{category}</span><span>{readTime}</span></div><h3>{title}</h3><p>{description}</p><span class="text-link">อ่านบทความ <span aria-hidden="true">↗</span></span></a>
