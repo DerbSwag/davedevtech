@@ -1,5 +1,23 @@
 ---
-interface Props { eyebrow?: string; title: string; description: string; }
-const { eyebrow = 'TECHNOLOGY THAT WORKS FOR YOU', title, description } = Astro.props;
+import Icon from './Icon.astro';
+interface Props { eyebrow?: string; title?: string; description?: string; }
+const { eyebrow = 'DaveDev Tech · ชลบุรีและบริการทางไกล', title = 'ดูแลระบบไอที ลดงานซ้ำ ให้ธุรกิจทำงานคล่องขึ้น', description = 'แก้ปัญหาคอมพิวเตอร์และเครือข่าย ทำรายงานอัตโนมัติ พร้อมวางระบบ Server, Backup และ Monitoring ให้เหมาะกับงานของคุณ' } = Astro.props;
 ---
-<section class="hero"><div class="hero-copy"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p class="hero-description">{description}</p><slot /></div><div class="hero-visual" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="chip"><span>DD</span><i>TECH / TH</i></div><span class="visual-label label-top">SYSTEMS · SUPPORT</span><span class="visual-label label-bottom">AUTOMATE THE EVERYDAY</span></div></section>
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{title}</h1>
+    <p class="hero-description">{description}</p>
+    <div class="hero-actions"><slot /></div>
+    <p class="hero-note">เริ่มจากเล่าอาการและผลกระทบที่เกิดขึ้น เรายินดีช่วยประเมินแนวทาง</p>
+  </div>
+  <aside class="hero-proof" aria-label="ขอบเขตบริการ">
+    <div class="proof-heading"><span class="status-dot" aria-hidden="true"></span><span>ดูแลเรื่องที่ทำให้งานสะดุด</span></div>
+    <ul class="proof-list">
+      <li><span class="proof-icon"><Icon name="monitor" /></span><span><strong>IT Support & Network</strong><small>เครื่องผู้ใช้ · Wi-Fi · ทะเบียนอุปกรณ์</small></span></li>
+      <li><span class="proof-icon"><Icon name="workflow" /></span><span><strong>Business Automation</strong><small>Excel · รายงาน · เชื่อมข้อมูล</small></span></li>
+      <li><span class="proof-icon"><Icon name="server" /></span><span><strong>Server, Backup & Monitoring</strong><small>VM · Storage · แจ้งเตือนสถานะ</small></span></li>
+    </ul>
+    <p class="proof-foot">ให้คำแนะนำตามปัญหาและงบประมาณ ไม่ยัดเครื่องมือเกินจำเป็น</p>
+  </aside>
+</section>

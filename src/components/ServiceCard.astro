@@ -1,5 +1,6 @@
 ---
-interface Props { icon: string; title: string; description: string; href: string; }
-const { icon, title, description, href } = Astro.props;
+import Icon from './Icon.astro';
+interface Props { icon: 'monitor' | 'network' | 'workflow' | 'server'; title: string; description: string; details: string; href: string; }
+const { icon, title, description, details, href } = Astro.props;
 ---
-<a class="service-card" href={href}><span class="service-icon" aria-hidden="true">{icon}</span><h3>{title}</h3><p>{description}</p><span class="text-link">ดูรายละเอียด <span aria-hidden="true">↗</span></span></a>
+<a class="service-card" href={href}><span class="service-icon"><Icon name={icon} /></span><h3>{title}</h3><p>{description}</p><span class="service-detail">{details}</span><span class="text-link">ดูบริการนี้ <span aria-hidden="true">↗</span></span></a>

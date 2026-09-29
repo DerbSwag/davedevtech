@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTA from './CTA.astro';
+import type { Service } from '../lib/services';
+interface Props { service: Service; }
+const { service } = Astro.props;
+---
+<BaseLayout title={`${service.title} | DaveDev Tech`} description={service.description}>
+  <section class="page-hero">
+    <a class="back-link" href="/services">← บริการทั้งหมด</a>
+    <p class="eyebrow">{service.title}</p>
+    <h1>{service.headline}</h1>
+    <p class="hero-description">{service.description}</p>
+    <a class="button button-primary" href="/contact">ปรึกษางานนี้</a>
+  </section>
+  <section class="section detail-layout">
+    <div><h2>เลือกขอบเขตให้เหมาะกับงานของคุณ</h2></div>
+    <div class="detail-copy">{service.scopes.map(([title, description]) => <><h3>{title}</h3><p>{description}</p></>)}</div>
+  </section>
+  <section class="section services-section detail-layout">
+    <div><h2>สิ่งที่จะได้รับและวิธีเริ่มงาน</h2></div>
+    <div class="detail-copy">
+      <h3>สิ่งส่งมอบตามขอบเขตที่ตกลง</h3><ul>{service.deliverables.map(item => <li>{item}</li>)}</ul>
+      <h3>ข้อมูลที่ควรเตรียม</h3><p>{service.preparation}</p>
+      <h3>ประเมินราคาอย่างไร</h3><p>{service.estimate}</p>
+      <p>ยืนยันขอบเขต ค่าใช้จ่าย และเงื่อนไขก่อนเริ่มดำเนินการ</p>
+    </div>
+  </section>
+  <CTA title="เล่าโจทย์ที่อยากให้ช่วยดูได้เลย" description="ส่งอาการหรือขั้นตอนงาน พร้อมข้อมูลเบื้องต้น เพื่อเริ่มประเมินแนวทางที่เหมาะสม" />
+</BaseLayout>

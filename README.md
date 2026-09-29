@@ -27,7 +27,7 @@ Copy `.env.example` to `.env` for local development. `PUBLIC_SITE_URL` controls 
 - Build output directory: `dist`
 - Node.js version: 22.12 or newer
 
-The project uses Astro's static output and does not require a Cloudflare adapter or server-side runtime. Cloudflare Pages applies the optional response security and hashed-asset caching rules in `public/_headers`. Replace the sample affiliate destinations in `src/content/guides/` and the contact email in `src/pages/contact.astro` with the business's live details.
+The project uses Astro's static output and does not require a Cloudflare adapter or server-side runtime. Cloudflare Pages applies the optional response security and hashed-asset caching rules in `public/_headers`. Contact currently uses `davedevtech@gmail.com`. Affiliate buttons are intentionally absent until DaveDev Tech has real affiliate destinations; do not publish placeholder URLs.
 
 ## Known build warning
 

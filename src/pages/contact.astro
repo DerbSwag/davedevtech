@@ -1,4 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+const email = 'davedevtech@gmail.com';
+const subject = encodeURIComponent('ปรึกษางาน IT — DaveDev Tech');
+const body = encodeURIComponent('ประเภทงาน/ปัญหา:\nอุปกรณ์หรือระบบที่เกี่ยวข้อง:\nอาการและสิ่งที่ลองทำแล้ว:\nพื้นที่ให้บริการ/ช่วงเวลาที่สะดวก:\n');
 ---
-<BaseLayout title="ติดต่อ DaveDev Tech | ปรึกษา IT Support และ Automation" description="ติดต่อ DaveDev Tech เพื่อปรึกษางาน IT Support, PC upgrade, Network หรือ Workflow Automation"><section class="page-hero compact"><p class="eyebrow">CONTACT</p><h1>เล่าโจทย์ของคุณให้เราฟัง</h1><p class="hero-description">ไม่ว่าจะเป็นปัญหาไอที งานซ้ำที่อยากลด หรือคำถามก่อนเลือกอุปกรณ์ เริ่มต้นปรึกษาได้เลย</p></section><section class="section contact-grid"><div><p class="eyebrow">HOW WE CAN HELP</p><h2>อธิบายสิ่งที่อยากแก้ แล้วเราจะช่วยประเมินแนวทาง</h2><p>เพื่อให้เริ่มต้นได้เร็วขึ้น ระบุประเภทงาน จำนวนผู้ใช้งาน อุปกรณ์ที่เกี่ยวข้อง และช่วงเวลาที่สะดวก</p><a class="button button-primary" href="mailto:hello@davedevtech.com?subject=ปรึกษาบริการ%20DaveDev%20Tech">ส่งอีเมลปรึกษา <span aria-hidden="true">↗</span></a></div><aside class="contact-note"><span class="service-icon" aria-hidden="true">✉</span><h3>DaveDev Tech</h3><p>IT Support<br />PC Troubleshooting & Upgrade<br />Network & Infrastructure<br />Workflow Automation</p><a href="mailto:hello@davedevtech.com">hello@davedevtech.com</a><p class="fine-print">หากมีภาพหน้าจอหรือรายละเอียดข้อผิดพลาด สามารถแนบมาในอีเมลได้ (โปรดลบข้อมูลสำคัญก่อนส่ง)</p></aside></section></BaseLayout>
+<BaseLayout title="ปรึกษางาน IT กับ DaveDev Tech" description="ติดต่อ DaveDev Tech เพื่อปรึกษา IT Support, Business Automation, Server, Backup และ Monitoring">
+  <section class="page-hero compact">
+    <p class="eyebrow">ติดต่อ DaveDev Tech</p>
+    <h1>เล่าปัญหาหรืองานที่อยากปรับได้เลย</h1>
+    <p class="hero-description">บอกอาการและผลกระทบที่เกิดขึ้น เราจะเริ่มจากทำความเข้าใจโจทย์ก่อนเสนอแนวทาง</p>
+  </section>
+  <section class="section contact-layout">
+    <div class="contact-primary">
+      <span class="contact-icon"><Icon name="email" /></span>
+      <p class="eyebrow">ติดต่อทางอีเมล</p>
+      <h2>ส่งรายละเอียดมาให้ Dave</h2>
+      <p>อีเมลจะเปิดพร้อมหัวข้อและรายการข้อมูลแนะนำ คุณแก้ไขข้อความและแนบรูปอาการได้ก่อนส่ง</p>
+      <a class="button button-primary" href={`mailto:${email}?subject=${subject}&body=${body}`}>เขียนอีเมลปรึกษา <span aria-hidden="true">↗</span></a>
+      <a class="contact-email" href={`mailto:${email}`}>{email}</a>
+    </div>
+    <aside class="contact-checklist">
+      <h2>ข้อมูลที่ช่วยให้ประเมินได้เร็วขึ้น</h2>
+      <ul>
+        <li>ประเภทงาน เช่น IT/Network, Automation หรือ Server/Backup/Monitoring</li>
+        <li>รุ่นอุปกรณ์ โปรแกรม หรือแหล่งข้อมูลที่เกี่ยวข้อง</li>
+        <li>อาการที่พบและเริ่มเกิดเมื่อไร</li>
+        <li>สิ่งที่ลองแก้ไขไปแล้ว (ถ้ามี)</li>
+        <li>พื้นที่และช่วงเวลาที่สะดวก หากต้อง On-site</li>
+      </ul>
+      <p class="privacy-note">ก่อนแนบภาพหน้าจอหรือไฟล์ โปรดลบ password, ข้อมูลส่วนบุคคล และข้อมูลธุรกิจที่ไม่เกี่ยวข้อง</p>
+    </aside>
+  </section>
+  <section class="contact-location" aria-label="พื้นที่ให้บริการ"><strong>พื้นที่ให้บริการ</strong><span>ชลบุรี · Remote support ตามลักษณะงาน</span></section>
+</BaseLayout>

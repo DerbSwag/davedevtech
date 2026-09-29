@@ -1,0 +1,10 @@
+---
+import Icon from './Icon.astro';
+interface Props { icon: 'monitor' | 'network' | 'workflow' | 'wrench'; title: string; description: string; href: string; }
+const { icon, title, description, href } = Astro.props;
+---
+<a class="issue-card" href={href}>
+  <span class="issue-icon"><Icon name={icon} /></span>
+  <span class="issue-copy"><strong>{title}</strong><small>{description}</small></span>
+  <span class="issue-arrow" aria-hidden="true">↗</span>
+</a>
