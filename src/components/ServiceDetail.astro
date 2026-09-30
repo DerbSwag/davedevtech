@@ -1,30 +1,91 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTA from './CTA.astro';
+import { getCaseStudyById } from '../lib/case-studies';
+import { serviceProcess } from '../lib/service-process';
 import type { Service } from '../lib/services';
+import '../styles/service-detail.css';
 interface Props { service: Service; }
 const { service } = Astro.props;
+const proof = service.proofId ? getCaseStudyById(service.proofId) : undefined;
 ---
 <BaseLayout title={`${service.title} | DaveDev Tech`} description={service.description}>
-  <section class="page-hero">
-    <a class="back-link" href="/services">← บริการทั้งหมด</a>
-    <p class="eyebrow">{service.title}</p>
-    <h1>{service.headline}</h1>
-    <p class="hero-description">{service.description}</p>
-    <a class="button button-primary" href="/contact">ปรึกษางานนี้</a>
-  </section>
-  <section class="section detail-layout">
-    <div><h2>เลือกขอบเขตให้เหมาะกับงานของคุณ</h2></div>
-    <div class="detail-copy">{service.scopes.map(([title, description]) => <><h3>{title}</h3><p>{description}</p></>)}</div>
-  </section>
-  <section class="section services-section detail-layout">
-    <div><h2>สิ่งที่จะได้รับและวิธีเริ่มงาน</h2></div>
-    <div class="detail-copy">
-      <h3>สิ่งส่งมอบตามขอบเขตที่ตกลง</h3><ul>{service.deliverables.map(item => <li>{item}</li>)}</ul>
-      <h3>ข้อมูลที่ควรเตรียม</h3><p>{service.preparation}</p>
-      <h3>ประเมินราคาอย่างไร</h3><p>{service.estimate}</p>
-      <p>ยืนยันขอบเขต ค่าใช้จ่าย และเงื่อนไขก่อนเริ่มดำเนินการ</p>
-    </div>
-  </section>
-  <CTA title="เล่าโจทย์ที่อยากให้ช่วยดูได้เลย" description="ส่งอาการหรือขั้นตอนงาน พร้อมข้อมูลเบื้องต้น เพื่อเริ่มประเมินแนวทางที่เหมาะสม" />
+  <div class="service-detail">
+    <header class="page-hero service-detail-hero">
+      <a class="back-link" href="/services">← บริการทั้งหมด</a>
+      <p class="eyebrow">{service.title}</p>
+      <h1>{service.headline}</h1>
+      <p class="hero-description">{service.description}</p>
+      <div class="service-detail-actions">
+        <a class="button button-primary" href="tel:0822059652">โทรปรึกษาปัญหา</a>
+        <a class="button button-outline" href="mailto:davedevtech@gmail.com">ส่งรายละเอียดทางอีเมล</a>
+      </div>
+    </header>
+
+    {service.problems && <section class="sd-section sd-problems" aria-labelledby={`sd-${service.slug}-problems`}>
+      <div class="sd-inner">
+        <h2 id={`sd-${service.slug}-problems`}>ปัญหาที่ช่วยตรวจสอบได้</h2>
+        <ul class="sd-problem-list">{service.problems.map((problem) => <li>{problem}</li>)}</ul>
+      </div>
+    </section>}
+
+    <section class="sd-section sd-scope" aria-labelledby={`sd-${service.slug}-scope`}>
+      <div class="sd-inner">
+        <h2 id={`sd-${service.slug}-scope`}>บริการนี้ครอบคลุมอะไรบ้าง</h2>
+        <div class="sd-scope-list">
+          {service.scopes.map(([title, description]) => <article class="sd-scope-item"><h3>{title}</h3><p>{description}</p></article>)}
+        </div>
+        <div class="sd-deliverables">
+          <h3>สิ่งส่งมอบตามขอบเขตที่ตกลง</h3>
+          <ul>{service.deliverables.map((item) => <li>{item}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+
+    {service.suitableFor && <section class="sd-section sd-suitable" aria-labelledby={`sd-${service.slug}-suitable`}>
+      <div class="sd-inner">
+        <h2 id={`sd-${service.slug}-suitable`}>บริการนี้เหมาะกับใคร</h2>
+        <ul class="sd-suitable-list">{service.suitableFor.map((item) => <li>{item}</li>)}</ul>
+      </div>
+    </section>}
+
+    <section class="sd-section sd-process" aria-labelledby={`sd-${service.slug}-process`}>
+      <div class="sd-inner">
+        <h2 id={`sd-${service.slug}-process`}>หลังจากติดต่อแล้วทำอย่างไร</h2>
+        <ol class="sd-process-list">
+          {serviceProcess.map((step) => <li><span class="sd-step-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.description}</p></div></li>)}
+        </ol>
+      </div>
+    </section>
+
+    {proof && <section class="sd-section sd-proof" aria-labelledby={`sd-${service.slug}-proof`}>
+      <div class="sd-inner">
+        <p class="eyebrow">ตัวอย่างแนวทางการทำงาน</p>
+        <h2 id={`sd-${service.slug}-proof`}>{proof.serviceDetailHeading}</h2>
+        <article class="sd-proof-example">
+          <p class="sd-proof-kicker">{proof.kicker}</p>
+          <h3>{proof.title}</h3>
+          <p>{proof.description}</p>
+          <ol>{proof.steps.map((step) => <li><strong>{step.label}</strong><span>{step.description}</span></li>)}</ol>
+          {'source' in proof && <a href={proof.source.href} target="_blank" rel="noopener noreferrer">{proof.source.label} <span aria-hidden="true">↗</span></a>}
+        </article>
+      </div>
+    </section>}
+
+    <section class="sd-section sd-preparation" aria-labelledby={`sd-${service.slug}-preparation`}>
+      <div class="sd-inner sd-preparation-inner">
+        <div>
+          <h2 id={`sd-${service.slug}-preparation`}>เตรียมข้อมูลก่อนติดต่อ</h2>
+          <p>{service.preparation}</p>
+        </div>
+        <aside class="sd-estimate">
+          <h3>การประเมินขอบเขตและค่าใช้จ่าย</h3>
+          <p>{service.estimate}</p>
+          <p>ยืนยันขอบเขต ค่าใช้จ่าย และเงื่อนไขก่อนเริ่มดำเนินการ</p>
+        </aside>
+      </div>
+    </section>
+
+    <CTA directContact title="เล่าโจทย์ที่อยากให้ช่วยดูได้เลย" description="แจ้งอาการ อุปกรณ์ที่ใช้งาน และภาพหน้าจอ/ข้อความ Error ถ้ามี เพื่อช่วยประเมินปัญหาเบื้องต้น" />
+  </div>
 </BaseLayout>

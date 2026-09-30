@@ -1,17 +1,23 @@
 ---
-interface Props { title?: string; description?: string; homepage?: boolean; }
+interface Props { title?: string; description?: string; homepage?: boolean; directContact?: boolean; }
 const {
   title = 'มีงาน IT ที่อยากให้ช่วยดูไหม?',
   description = 'เริ่มจากเล่าอาการหรือขั้นตอนที่อยากปรับ แล้วค่อยประเมินแนวทางและขอบเขตงานร่วมกัน',
   homepage = false,
+  directContact = false,
 } = Astro.props;
 ---
-<section class:list={['cta-band', { 'home-cta': homepage }]} aria-labelledby={homepage ? 'home-cta-title' : undefined}>
-  <div><p class="eyebrow">เริ่มจากการพูดคุย</p><h2 id={homepage ? 'home-cta-title' : undefined}>{title}</h2><p>{description}</p></div>
+<section class:list={['cta-band', { 'home-cta': homepage }]} aria-labelledby={homepage ? 'home-cta-title' : directContact ? 'service-cta-title' : undefined}>
+  <div><p class="eyebrow">เริ่มจากการพูดคุย</p><h2 id={homepage ? 'home-cta-title' : directContact ? 'service-cta-title' : undefined}>{title}</h2><p>{description}</p></div>
   {homepage ? (
     <div class="cta-actions">
       <a class="button button-primary" href="tel:0822059652">โทร 082 205 9652</a>
       <a class="button button-light" href="mailto:davedevtech@gmail.com">ส่งอีเมล</a>
+    </div>
+  ) : directContact ? (
+    <div class="cta-actions">
+      <a class="button button-primary" href="tel:0822059652">โทรปรึกษาปัญหา</a>
+      <a class="button button-light" href="mailto:davedevtech@gmail.com">ส่งรายละเอียดทางอีเมล</a>
     </div>
   ) : (
     <a class="button button-light" href="/contact">ปรึกษางาน <span aria-hidden="true">↗</span></a>

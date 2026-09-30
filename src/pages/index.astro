@@ -8,6 +8,7 @@ import GuideCard from '../components/GuideCard.astro';
 import CTA from '../components/CTA.astro';
 import Icon from '../components/Icon.astro';
 import { getSortedGuides } from '../lib/guides';
+import { serviceProcess } from '../lib/service-process';
 import '../styles/home.css';
 
 const problems = [
@@ -58,11 +59,7 @@ const guides = (await getSortedGuides()).slice(0, 3);
         <p class="section-intro">จากอาการที่พบ สู่แนวทางแก้และการตรวจงานร่วมกัน</p>
       </div>
       <ol class="process-list">
-        <li><span>01</span><h3>แจ้งปัญหา</h3><p>เล่าอาการ อุปกรณ์ หรือขั้นตอนงานที่ติดขัด</p></li>
-        <li><span>02</span><h3>ประเมินเบื้องต้น</h3><p>สอบถามข้อมูลเพิ่มและดูขอบเขตที่ต้องตรวจ</p></li>
-        <li><span>03</span><h3>เสนอแนวทาง</h3><p>อธิบายทางเลือก ขอบเขตงาน และค่าใช้จ่ายก่อนเริ่ม</p></li>
-        <li><span>04</span><h3>ดำเนินการ</h3><p>แก้ไขหรือปรับ Workflow ตามแนวทางที่ตกลงกัน</p></li>
-        <li><span>05</span><h3>Verify / Follow-up</h3><p>ตรวจผลการใช้งาน สรุปสิ่งที่ทำ และแนะนำการดูแลต่อ</p></li>
+        {serviceProcess.map((step) => <li><span>{step.number}</span><h3>{step.title}</h3><p>{step.description}</p></li>)}
       </ol>
     </section>
 

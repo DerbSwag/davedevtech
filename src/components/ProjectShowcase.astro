@@ -1,3 +1,6 @@
+---
+import { caseStudies } from '../lib/case-studies';
+---
 <section class="work-section" id="work" aria-labelledby="work-title">
   <div class="work-inner">
     <div class="work-heading">
@@ -7,29 +10,17 @@
     </div>
 
     <div class="case-grid">
-      <article class="case-card">
-        <p class="case-kicker">01 / NETWORK TROUBLESHOOTING</p>
-        <h3>เมื่อ Wi-Fi หรือ LAN ทำให้งานสะดุด</h3>
-        <p>ลำดับการตรวจปัญหาเครือข่าย โดยไม่เปิดเผยรายละเอียดระบบภายใน</p>
-        <ol class="case-steps">
-          <li><strong>Problem</strong><span>Wi-Fi หรือ LAN ไม่เสถียร</span></li>
-          <li><strong>Diagnosis</strong><span>ตรวจอุปกรณ์ จุดเชื่อมต่อ และการตั้งค่า</span></li>
-          <li><strong>Resolution</strong><span>แก้ตามสาเหตุที่พบ</span></li>
-          <li><strong>Verification</strong><span>ทดสอบการเชื่อมต่อและใช้งานซ้ำ</span></li>
-        </ol>
-      </article>
-
-      <article class="case-card">
-        <p class="case-kicker">02 / ATTENDANCE WORKFLOW</p>
-        <h3>ตัวอย่าง Workflow สำหรับรายงานเวลาทำงาน</h3>
-        <p>ตัวอย่างเครื่องมือ Python สำหรับกรองข้อมูลเวลาทำงานตามแผนกและส่งออก Excel ช่วยให้เห็นแนวทางเปลี่ยนงานจัดรายงานเป็น Workflow ที่ทำซ้ำได้</p>
-        <ol class="case-steps">
-          <li><strong>ข้อมูลเข้า</strong><span>ข้อมูลเวลาทำงาน</span></li>
-          <li><strong>ขั้นตอน</strong><span>กรองและตรวจข้อมูล</span></li>
-          <li><strong>ผลลัพธ์</strong><span>รายงาน Excel</span></li>
-        </ol>
-        <a class="case-source" href="https://github.com/DerbSwag/factory_demo" target="_blank" rel="noopener noreferrer">ดูตัวอย่างเครื่องมือบน GitHub <span aria-hidden="true">↗</span></a>
-      </article>
+      {caseStudies.map((caseStudy) => (
+        <article class="case-card">
+          <p class="case-kicker">{caseStudy.kicker}</p>
+          <h3>{caseStudy.title}</h3>
+          <p>{caseStudy.description}</p>
+          <ol class="case-steps">
+            {caseStudy.steps.map((step) => <li><strong>{step.label}</strong><span>{step.description}</span></li>)}
+          </ol>
+          {'source' in caseStudy && <a class="case-source" href={caseStudy.source.href} target="_blank" rel="noopener noreferrer">{caseStudy.source.label} <span aria-hidden="true">↗</span></a>}
+        </article>
+      ))}
     </div>
   </div>
 </section>
