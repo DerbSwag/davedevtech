@@ -4,10 +4,11 @@
 
 - Production URL: https://davedevtech.davedevtech.workers.dev
 - Production platform: Cloudflare Workers Static Assets
-- Approved production commit: `0544ab640dcc2eccf5721b60fe74ffa5b7dc4615`
-- Commit subject: `feat: separate network service architecture`
-- Cloudflare Workers production version: `eff9e712-22a2-4549-963c-ce93eb5e4acf`
-- Git state at the Phase 06A deployment checkpoint: `main` matched `origin/main`, ahead 0, behind 0, working tree clean.
+- Latest approved production feature commit: `4a1065adbe256188ceccdcdbe6cb94766feeb87f`
+- Commit subject: `feat: improve service detail conversion`
+- Cloudflare Worker: `davedevtech`
+- Cloudflare Workers production version: `b61692dc-abe8-40b1-b3c2-63a6c775822c`
+- Git state after Phase 06B push: `main` matched `origin/main`, ahead 0, behind 0, working tree clean.
 
 ## Frozen service information architecture
 
@@ -24,9 +25,10 @@ Infrastructure covers Server, VM/Virtualization, Storage, Backup, and Monitoring
 
 ## Phase status
 
-- **Phase 06A — Services Information Architecture: DONE.**
+- **Phase 06A — Service IA: DONE / production.**
+- **Phase 06B — Service Detail Conversion: DONE / production.**
 - **Phase 06 overall: IN PROGRESS.** Do not mark the full phase complete.
-- **Next: Phase 06B — Service Detail Conversion Audit / Planning.** Implementation has not started.
+- **Next: Phase 06C — Proof / Case Studies.** It has not started; begin with a read-only audit.
 
 ## Phase 06A completed work
 
@@ -56,9 +58,28 @@ Expected routes returned HTTP 200. Canonical URLs and `og:url` used the Workers 
 
 The three existing MDX/Rolldown build warnings remain known, non-fatal technical debt.
 
+## Phase 06B completed work
+
+- Reworked all four service detail pages through the shared, data-driven `ServiceDetail` renderer.
+- Service detail flow: Hero → ปัญหาที่ช่วยตรวจสอบได้ → บริการนี้ครอบคลุมอะไรบ้าง → บริการนี้เหมาะกับใคร → shared five-step process → optional relevant proof → เตรียมข้อมูลก่อนติดต่อ / estimate guidance → direct contact CTA.
+- Centralized the service-neutral process in `src/lib/service-process.ts` and proof records in `src/lib/case-studies.ts`.
+- Proof sections are optional and keyed by stable proof IDs; services without an assigned proof omit that section. Service records resolve by slug, without positional service lookups.
+- Service proof assignments:
+  - IT Support: no proof currently assigned.
+  - Network & Wi-Fi: `network-troubleshooting`; heading: `ตัวอย่างแนวทางการตรวจสอบ`.
+  - Workflow Automation: `attendance-workflow`; heading: `ตัวอย่าง Workflow ที่เกี่ยวข้อง`.
+  - Infrastructure: no proof currently assigned.
+- Service detail CTA: primary `โทรปรึกษาปัญหา` (`tel:0822059652`); secondary `ส่งรายละเอียดทางอีเมล` (`mailto:davedevtech@gmail.com`). Preparation guidance asks for symptoms/problem, the device involved, and a screenshot or error message when available. No contact-form backend was added.
+- Responsive browser QA passed for the Network reference (approved previously), and for IT Support, Workflow Automation, and Infrastructure at `390x844` and `1024x768`.
+- Automated validation passed: `npm run check`, production build (12 pages), all four service routes, internal links, Workers-host canonicals, sitemap/robots, assets, security headers, and custom 404. No `davedevtech.com` fallback was found. The three known non-fatal MDX/Rolldown warnings remain.
+
+## Production route reality
+
+`/about/` and `/case-studies/` are not generated standalone routes and currently return HTTP 404 in production. Do not create them merely to match navigation terminology; Homepage sections may represent these concepts.
+
 ## Immediate next action
 
-Begin **PHASE 06B — Service Detail Conversion Audit / Planning**. Start with a read-only audit and plan; do not imply implementation has begun.
+Begin **PHASE 06C — Proof / Case Studies** with a read-only audit. Phase 06C design and implementation have not started.
 
 Expected workflow:
 
