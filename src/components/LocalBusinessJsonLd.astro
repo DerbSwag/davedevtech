@@ -1,0 +1,34 @@
+---
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'DaveDev Tech',
+  description: 'Computer Support & IT Services in Khlong Kiu, Ban Bueng, Chon Buri, with Remote Support where appropriate.',
+  telephone: '0822059652',
+  email: 'davedevtech@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '111/12 Moo 9, D-One Garden Ville Village',
+    addressLocality: 'Tambon Khlong Kiu, Ban Bueng District',
+    addressRegion: 'Chon Buri',
+    postalCode: '20220',
+    addressCountry: 'TH',
+  },
+  areaServed: ['Khlong Kiu', 'Ban Bueng', 'Chon Buri'],
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => `https://schema.org/${day}`),
+      opens: '18:00',
+      closes: '20:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'https://schema.org/Sunday',
+      opens: '09:00',
+      closes: '17:00',
+    },
+  ],
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(business)} />

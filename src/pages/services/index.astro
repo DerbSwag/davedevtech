@@ -6,6 +6,6 @@ import { services } from '../../lib/services';
 ---
 <BaseLayout title="บริการ IT, Business Automation และ Infrastructure | DaveDev Tech" description="ดูแลคอมพิวเตอร์และ Network ลดงาน Excel และรายงานซ้ำ พร้อมประเมิน Server, Backup และ Monitoring สำหรับธุรกิจ">
   <section class="page-hero"><p class="eyebrow">บริการของ DaveDev Tech</p><h1>จากปัญหาไอทีประจำวัน ถึงระบบที่ช่วยให้งานเดินต่อ</h1><p class="hero-description">เลือกจากงานที่ต้องการให้ช่วย แล้วดูขอบเขต สิ่งส่งมอบ และวิธีประเมินราคาได้ในแต่ละบริการ</p></section>
-  <section class="section services-section" aria-label="รายการบริการ"><div class="card-grid">{services.map(service => <ServiceCard {...service} href={`/services/${service.slug}`} />)}</div></section>
+  <section class="section services-section" aria-label="รายการบริการ"><div class="card-grid">{services.map(service => <ServiceCard {...service} href={`/services/${service.slug}`} headingLevel={2} />)}</div></section>
   <CTA title="ไม่แน่ใจว่าควรเริ่มจากบริการไหน?" description="ส่งปัญหาหรือขั้นตอนงานปัจจุบันมาให้ Dave ช่วยประเมินแนวทางก่อน" />
 </BaseLayout>
