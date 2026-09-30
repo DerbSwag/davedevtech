@@ -391,14 +391,27 @@ Representative scope:
 - General troubleshooting
 - Remote Support where appropriate
 
-### Network & Infrastructure
+### Network & Wi-Fi
 
 Representative scope:
 
 - LAN
 - Wi-Fi
-- Network troubleshooting
-- Small-office infrastructure
+- Router/Switch connectivity
+- IP/DHCP troubleshooting
+- Home and small-office networking
+
+### Infrastructure
+
+Representative scope:
+
+- Server
+- VM / Virtualization
+- Storage
+- Backup
+- Monitoring
+
+Network covers customer-facing connectivity such as LAN, Wi-Fi, Router/Switch connectivity, IP/DHCP troubleshooting, and home or small-office networking. Infrastructure covers Server, virtualization, storage, backup, and monitoring. These are separate service categories; Network is not hidden under Infrastructure, and Infrastructure is not a generic category for all IT work.
 
 ### Workflow Automation
 

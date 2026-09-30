@@ -105,6 +105,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .issue-arrow { color: var(--color-primary); font-size: 15px; }
 .services-section { background: var(--color-surface); }
 .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+.services-page .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .service-card, .guide-card { min-width: 0; min-height: 260px; padding: var(--space-6); display: flex; flex-direction: column; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
 .service-card:hover, .guide-card:hover { transform: translateY(-2px); border-color: var(--color-primary); box-shadow: var(--shadow-md); }
 .service-card:focus-visible, .guide-card:focus-visible { border-color: var(--color-primary); box-shadow: var(--shadow-md); }
@@ -247,7 +248,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .proof-list { grid-template-columns: 1fr; }
   .proof-list li { flex-direction: row; align-items: center; }
   .proof-list small { font-size: var(--text-small); line-height: var(--leading-small); }
-  .issue-grid, .card-grid { grid-template-columns: 1fr; }
+  .issue-grid, .card-grid, .services-page .card-grid { grid-template-columns: 1fr; }
   .issue-card { min-height: 95px; }
   .process-list { grid-template-columns: 1fr; gap: var(--space-5); }
   .process-list li { display: grid; grid-template-columns: 36px 1fr; column-gap: var(--space-3); }

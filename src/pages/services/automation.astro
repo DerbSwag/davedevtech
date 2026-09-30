@@ -1,5 +1,5 @@
 ---
 import ServiceDetail from '../../components/ServiceDetail.astro';
-import { services } from '../../lib/services';
+import { getServiceBySlug } from '../../lib/services';
 ---
-<ServiceDetail service={services[1]} />
+<ServiceDetail service={getServiceBySlug('automation')} />

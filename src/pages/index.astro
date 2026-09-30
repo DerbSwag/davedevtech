@@ -12,7 +12,7 @@ import '../styles/home.css';
 
 const problems = [
   { icon: 'monitor', title: 'คอมมีปัญหา', description: 'คอมช้า เปิดไม่ติด โปรแกรมมีปัญหา', href: '/services/it-support' },
-  { icon: 'network', title: 'Network / Wi-Fi', description: 'Wi-Fi ช้า หลุดบ่อย หรือระบบ LAN มีปัญหา', href: '/services/it-support' },
+  { icon: 'network', title: 'Network / Wi-Fi', description: 'Wi-Fi ช้า หลุดบ่อย หรือระบบ LAN มีปัญหา', href: '/services/network' },
   { icon: 'workflow', title: 'งานซ้ำทุกวัน', description: 'ทำ Excel หรือกรอกข้อมูลเดิมซ้ำทุกวัน?', href: '/services/automation' },
   { icon: 'wrench', title: 'Upgrade PC', description: 'อยากให้เครื่องทำงานดีขึ้น หรือเลือกสเปกให้ตรงกับการใช้งาน', href: '/services/it-support' },
 ] as const;
@@ -20,7 +20,7 @@ const problems = [
 // Homepage categories reflect customer problems. The existing service-detail routes stay intact.
 const homepageServices = [
   { icon: 'monitor', title: 'IT Support', description: 'คอมพิวเตอร์หรือโปรแกรมมีปัญหา? ช่วยตรวจอาการ แก้ไข และแนะนำทางเลือกที่เหมาะกับงาน', details: 'PC / Notebook · Windows · Software · Remote Support', href: '/services/it-support' },
-  { icon: 'network', title: 'Network & Infrastructure', description: 'Wi-Fi หลุดหรือ LAN ใช้งานไม่เสถียร? ช่วยตรวจเครือข่ายและวางแนวทางสำหรับสำนักงานขนาดเล็ก', details: 'Wi-Fi · LAN · Router · Network troubleshooting', href: '/services/it-support' },
+  { icon: 'network', title: 'Network & Wi-Fi', description: 'Wi-Fi หลุดหรือ LAN ใช้งานไม่เสถียร? ช่วยตรวจเครือข่ายและวางแนวทางสำหรับสำนักงานขนาดเล็ก', details: 'Wi-Fi · LAN · Router · Network troubleshooting', href: '/services/network' },
   { icon: 'workflow', title: 'Workflow Automation', description: 'เสียเวลารวมไฟล์หรือทำรายงานเดิมซ้ำ? ช่วยปรับขั้นตอนให้จัดข้อมูลและตรวจผลได้ง่ายขึ้น', details: 'Excel · Data processing · Python · SQL · Scheduled jobs', href: '/services/automation' },
 ] as const;
 
@@ -77,7 +77,7 @@ const guides = (await getSortedGuides()).slice(0, 3);
         </div>
         <div class="about-experience" aria-label="แนวทางและประสบการณ์">
           <div><Icon name="monitor" /><span><strong>Support ผู้ใช้งาน</strong><small>คอมพิวเตอร์ โปรแกรม และปัญหาที่กระทบการทำงานประจำวัน</small></span></div>
-          <div><Icon name="network" /><span><strong>Network &amp; Infrastructure</strong><small>ตรวจปัญหาเครือข่ายและดูแลระบบที่ธุรกิจใช้งาน</small></span></div>
+          <div><Icon name="network" /><span><strong>Network • Infrastructure</strong><small>ตรวจปัญหาเครือข่ายและดูแลระบบที่ธุรกิจใช้งาน</small></span></div>
           <div><Icon name="workflow" /><span><strong>Automation ที่ดูแลต่อได้</strong><small>ลดการทำข้อมูลซ้ำ พร้อมอธิบายขั้นตอนให้ทีมใช้งานต่อ</small></span></div>
         </div>
       </div>
