@@ -1,6 +1,9 @@
+---
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+---
 <footer class="site-footer">
   <div class="footer-identity">
-    <a class="brand" href="/" aria-label="DaveDev Tech หน้าแรก"><span class="brand-mark">D</span><span>DaveDev <b>Tech</b></span></a>
+    <a class="brand" href="/" aria-label="DaveDev Tech หน้าแรก" aria-current={currentPath === '/' ? 'page' : undefined}><span class="brand-mark">D</span><span>DaveDev <b>Tech</b></span></a>
     <p>Computer Support &amp; IT Services</p>
     <p>คลองกิ่ว–บ้านบึง ชลบุรี<br />และ Remote Support ตามลักษณะงาน</p>
   </div>
@@ -15,7 +18,7 @@
     <h2>เวลาติดต่อ</h2>
     <p>จันทร์–เสาร์ 18:00–20:00<br />อาทิตย์ 09:00–17:00</p>
   </div>
-  <nav class="footer-links" aria-label="เมนูท้ายเว็บ"><a href="/services">บริการ</a><a href="/#work">ผลงาน</a><a href="/guides">บทความ</a><a href="/#about">เกี่ยวกับเรา</a><a href="/contact">ติดต่อเรา</a></nav>
+  <nav class="footer-links" aria-label="เมนูท้ายเว็บ"><a href="/services" aria-current={currentPath === '/services' ? 'page' : undefined}>บริการ</a><a href="/#work">ผลงาน</a><a href="/guides" aria-current={currentPath === '/guides' ? 'page' : undefined}>บทความ</a><a href="/#about">เกี่ยวกับเรา</a><a href="/contact" aria-current={currentPath === '/contact' ? 'page' : undefined}>ติดต่อเรา</a></nav>
   <small class="footer-address">111/12 Moo 9, D-One Garden Ville Village, Tambon Khlong Kiu, Ban Bueng District, Chon Buri 20220</small>
   <small class="footer-copyright">© {new Date().getFullYear()} DaveDev Tech. All rights reserved.</small>
 </footer>
