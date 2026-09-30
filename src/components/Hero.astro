@@ -1,23 +1,23 @@
 ---
 import Icon from './Icon.astro';
-interface Props { eyebrow?: string; title?: string; description?: string; }
-const { eyebrow = 'DaveDev Tech · ชลบุรีและบริการทางไกล', title = 'ดูแลระบบไอที ลดงานซ้ำ ให้ธุรกิจทำงานคล่องขึ้น', description = 'แก้ปัญหาคอมพิวเตอร์และเครือข่าย ทำรายงานอัตโนมัติ พร้อมวางระบบ Server, Backup และ Monitoring ให้เหมาะกับงานของคุณ' } = Astro.props;
 ---
-<section class="hero">
+
+<section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>{title}</h1>
-    <p class="hero-description">{description}</p>
+    <p class="eyebrow">IT SUPPORT • CHONBURI • REMOTE SUPPORT</p>
+    <h1 id="hero-title">ปัญหา IT ไม่ควรทำให้งานของคุณต้องหยุด</h1>
+    <p class="hero-description">DaveDev Tech ช่วยแก้ปัญหาคอมพิวเตอร์และ Network พร้อมปรับ Workflow ที่ต้องทำซ้ำ สำหรับผู้ใช้ทั่วไป ธุรกิจขนาดเล็ก และทีมงาน</p>
     <div class="hero-actions"><slot /></div>
-    <p class="hero-note">เริ่มจากเล่าอาการและผลกระทบที่เกิดขึ้น เรายินดีช่วยประเมินแนวทาง</p>
+    <p class="hero-note">คลองกิ่ว–บ้านบึง ชลบุรี และ Remote Support ตามลักษณะงาน</p>
   </div>
-  <aside class="hero-proof" aria-label="ขอบเขตบริการ">
-    <div class="proof-heading"><span class="status-dot" aria-hidden="true"></span><span>ดูแลเรื่องที่ทำให้งานสะดุด</span></div>
+  <aside class="hero-proof capability-panel" aria-label="ขอบเขตบริการ DaveDev Tech">
+    <p class="capability-label">WHAT WE SUPPORT</p>
+    <h2>ดูแล IT สำหรับการใช้งานในทุกวัน</h2>
     <ul class="proof-list">
-      <li><span class="proof-icon"><Icon name="monitor" /></span><span><strong>IT Support & Network</strong><small>เครื่องผู้ใช้ · Wi-Fi · ทะเบียนอุปกรณ์</small></span></li>
-      <li><span class="proof-icon"><Icon name="workflow" /></span><span><strong>Business Automation</strong><small>Excel · รายงาน · เชื่อมข้อมูล</small></span></li>
-      <li><span class="proof-icon"><Icon name="server" /></span><span><strong>Server, Backup & Monitoring</strong><small>VM · Storage · แจ้งเตือนสถานะ</small></span></li>
+      <li><span class="proof-icon"><Icon name="monitor" /></span><span><strong>PC &amp; SOFTWARE</strong><small>คอมพิวเตอร์ · Windows · โปรแกรม</small></span></li>
+      <li><span class="proof-icon"><Icon name="network" /></span><span><strong>NETWORK</strong><small>Wi-Fi · LAN · อุปกรณ์เครือข่าย</small></span></li>
+      <li><span class="proof-icon"><Icon name="workflow" /></span><span><strong>AUTOMATION</strong><small>Excel · ข้อมูล · ขั้นตอนงานซ้ำ</small></span></li>
     </ul>
-    <p class="proof-foot">ให้คำแนะนำตามปัญหาและงบประมาณ ไม่ยัดเครื่องมือเกินจำเป็น</p>
+    <p class="proof-foot">บริการตามปัญหาจริง พร้อมอธิบายแนวทางก่อนลงมือ</p>
   </aside>
 </section>

@@ -1,69 +1,97 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import IssueCard from '../components/IssueCard.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import ProjectShowcase from '../components/ProjectShowcase.astro';
-import { services } from '../lib/services';
 import GuideCard from '../components/GuideCard.astro';
 import CTA from '../components/CTA.astro';
 import Icon from '../components/Icon.astro';
 import { getSortedGuides } from '../lib/guides';
+import '../styles/home.css';
+
+const problems = [
+  { icon: 'monitor', title: 'คอมมีปัญหา', description: 'คอมช้า เปิดไม่ติด โปรแกรมมีปัญหา', href: '/services/it-support' },
+  { icon: 'network', title: 'Network / Wi-Fi', description: 'Wi-Fi ช้า หลุดบ่อย หรือระบบ LAN มีปัญหา', href: '/services/it-support' },
+  { icon: 'workflow', title: 'งานซ้ำทุกวัน', description: 'ทำ Excel หรือกรอกข้อมูลเดิมซ้ำทุกวัน?', href: '/services/automation' },
+  { icon: 'wrench', title: 'Upgrade PC', description: 'อยากให้เครื่องทำงานดีขึ้น หรือเลือกสเปกให้ตรงกับการใช้งาน', href: '/services/it-support' },
+] as const;
+
+// Homepage categories reflect customer problems. The existing service-detail routes stay intact.
+const homepageServices = [
+  { icon: 'monitor', title: 'IT Support', description: 'คอมพิวเตอร์หรือโปรแกรมมีปัญหา? ช่วยตรวจอาการ แก้ไข และแนะนำทางเลือกที่เหมาะกับงาน', details: 'PC / Notebook · Windows · Software · Remote Support', href: '/services/it-support' },
+  { icon: 'network', title: 'Network & Infrastructure', description: 'Wi-Fi หลุดหรือ LAN ใช้งานไม่เสถียร? ช่วยตรวจเครือข่ายและวางแนวทางสำหรับสำนักงานขนาดเล็ก', details: 'Wi-Fi · LAN · Router · Network troubleshooting', href: '/services/it-support' },
+  { icon: 'workflow', title: 'Workflow Automation', description: 'เสียเวลารวมไฟล์หรือทำรายงานเดิมซ้ำ? ช่วยปรับขั้นตอนให้จัดข้อมูลและตรวจผลได้ง่ายขึ้น', details: 'Excel · Data processing · Python · SQL · Scheduled jobs', href: '/services/automation' },
+] as const;
 
 const guides = (await getSortedGuides()).slice(0, 3);
 ---
 
-<BaseLayout title="DaveDev Tech — IT Support, Automation & Infrastructure" description="ดูแล IT และ Network ลดงาน Excel และรายงานซ้ำ พร้อมบริการ Server, Backup และ Monitoring ในชลบุรีและทางไกล">
-  <Hero>
-    <a class="button button-primary" href="/contact">ปรึกษาปัญหา IT <span aria-hidden="true">↗</span></a>
-    <a class="button button-outline" href="/services">ดูบริการทั้งหมด</a>
-  </Hero>
+<BaseLayout title="DaveDev Tech | IT Support, Network และ Workflow Automation ในชลบุรี" description="คอมมีปัญหา Wi-Fi ไม่เสถียร หรืองาน Excel ซ้ำทุกวัน? DaveDev Tech ให้บริการ IT Support, Network และ Workflow Automation ในคลองกิ่ว–บ้านบึง ชลบุรี และ Remote Support">
+  <div class="homepage">
+    <Hero>
+      <a class="button button-primary" href="/contact">ปรึกษาปัญหา IT</a>
+      <a class="button button-outline" href="/services">ดูบริการทั้งหมด</a>
+    </Hero>
 
-  <section class="section services-section" aria-labelledby="services-title">
-    <div class="section-heading">
-      <div><p class="eyebrow">บริการ</p><h2 id="services-title">วันนี้อยากให้ช่วยเรื่องอะไร?</h2></div>
-      <a class="text-link" href="/services">ดูบริการทั้งหมด <span aria-hidden="true">↗</span></a>
-    </div>
-    <div class="card-grid">
-      {services.map(service => <ServiceCard {...service} href={`/services/${service.slug}`} />)}
-    </div>
-  </section>
+    <section class="section issue-section" id="problems" aria-labelledby="problems-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">เริ่มจากปัญหาของคุณ</p><h2 id="problems-title">วันนี้อยากให้ช่วยเรื่องอะไร?</h2></div>
+        <p class="section-intro">ไม่ต้องรู้ชื่อบริการก่อน เลือกจากอาการหรืองานที่ติดขัดได้เลย</p>
+      </div>
+      <div class="issue-grid">{problems.map(problem => <IssueCard {...problem} />)}</div>
+    </section>
 
-  <ProjectShowcase />
+    <section class="section services-section" id="services" aria-labelledby="services-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">บริการ</p><h2 id="services-title">ดูแลระบบให้ตรงกับงานที่ต้องทำ</h2></div>
+        <a class="text-link" href="/services">ดูบริการทั้งหมด <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="card-grid">{homepageServices.map(service => <ServiceCard {...service} />)}</div>
+    </section>
 
-  <section class="section process-section" aria-labelledby="process-title">
-    <div class="section-heading"><div><p class="eyebrow">ขั้นตอนการทำงาน</p><h2 id="process-title">รู้ว่าจะเกิดอะไรขึ้นตั้งแต่ก่อนเริ่ม</h2></div><p class="section-intro">เริ่มจากทำความเข้าใจปัญหา แล้วตกลงแนวทางร่วมกันก่อนลงมือ</p></div>
-    <ol class="process-list">
-      <li><span>01</span><h3>เล่าปัญหา</h3><p>แจ้งอาการ อุปกรณ์ และผลกระทบที่เกิดขึ้น</p></li>
-      <li><span>02</span><h3>ประเมิน</h3><p>สอบถามข้อมูลเพิ่มและตรวจหาสาเหตุเบื้องต้น</p></li>
-      <li><span>03</span><h3>ตกลงแนวทาง</h3><p>อธิบายวิธีแก้ ขอบเขตงาน และค่าใช้จ่ายก่อนเริ่ม</p></li>
-      <li><span>04</span><h3>ดำเนินการ</h3><p>แก้ไขหรือปรับ Workflow ตามแนวทางที่ตกลงกัน</p></li>
-      <li><span>05</span><h3>ส่งมอบและติดตาม</h3><p>สรุปสิ่งที่ทำ พร้อมคำแนะนำสำหรับดูแลต่อ</p></li>
-    </ol>
-  </section>
+    <ProjectShowcase />
 
-  <section class="trust-section" aria-labelledby="trust-title">
-    <div class="trust-inner">
-      <div><p class="eyebrow">แนวทางของ DaveDev Tech</p><h2 id="trust-title">เทคนิคที่ดี<br />ต้องเข้าใจง่ายและดูแลต่อได้</h2></div>
-      <ul class="trust-points">
-        <li><Icon name="wrench" /><span><strong>เริ่มจากปัญหาจริง</strong><small>เลือกวิธีแก้ให้ตรงกับงาน ไม่เริ่มจากการขายเครื่องมือ</small></span></li>
-        <li><Icon name="shield" /><span><strong>อธิบายก่อนลงมือ</strong><small>คุยเรื่องทางเลือก ขอบเขต และค่าใช้จ่ายให้เข้าใจตรงกัน</small></span></li>
-        <li><Icon name="server" /><span><strong>คิดถึงการดูแลระยะยาว</strong><small>ส่งมอบแนวทางที่ทีมเข้าใจและดูแลต่อได้</small></span></li>
-      </ul>
-    </div>
-  </section>
+    <section class="section process-section" id="process" aria-labelledby="process-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">ขั้นตอนการทำงาน</p><h2 id="process-title">คุยให้เข้าใจก่อนลงมือ</h2></div>
+        <p class="section-intro">จากอาการที่พบ สู่แนวทางแก้และการตรวจงานร่วมกัน</p>
+      </div>
+      <ol class="process-list">
+        <li><span>01</span><h3>แจ้งปัญหา</h3><p>เล่าอาการ อุปกรณ์ หรือขั้นตอนงานที่ติดขัด</p></li>
+        <li><span>02</span><h3>ประเมินเบื้องต้น</h3><p>สอบถามข้อมูลเพิ่มและดูขอบเขตที่ต้องตรวจ</p></li>
+        <li><span>03</span><h3>เสนอแนวทาง</h3><p>อธิบายทางเลือก ขอบเขตงาน และค่าใช้จ่ายก่อนเริ่ม</p></li>
+        <li><span>04</span><h3>ดำเนินการ</h3><p>แก้ไขหรือปรับ Workflow ตามแนวทางที่ตกลงกัน</p></li>
+        <li><span>05</span><h3>Verify / Follow-up</h3><p>ตรวจผลการใช้งาน สรุปสิ่งที่ทำ และแนะนำการดูแลต่อ</p></li>
+      </ol>
+    </section>
 
-  <section class="section about-section" id="about" aria-labelledby="about-title">
-    <div class="about-card">
-      <div class="about-mark" aria-hidden="true">D</div>
-      <div class="about-copy"><p class="eyebrow">เกี่ยวกับผู้ดูแลงาน</p><h2 id="about-title">Natthawat (Derb) — DaveDev Tech</h2><p>IT/System Infrastructure Engineer และผู้ให้บริการอิสระในชลบุรี สนใจงานดูแลระบบ เครือข่าย และ Automation โดยเน้นอธิบายแนวทางให้เข้าใจและส่งต่อให้ดูแลได้</p><ul class="skill-list"><li>IT Support</li><li>Proxmox</li><li>FortiGate</li><li>Python Automation</li><li>Docker & Monitoring</li></ul><a class="text-link" href="https://github.com/DerbSwag">ดูโปรไฟล์และผลงานบน GitHub</a></div>
-    </div>
-    <div class="service-area"><span class="area-pin" aria-hidden="true">⌖</span><p><strong>ชลบุรีและบริการทางไกล</strong><small>On-site ในพื้นที่ให้บริการ · Remote support ตามลักษณะงาน</small></p><a class="text-link" href="/contact">สอบถามพื้นที่และบริการ <span aria-hidden="true">↗</span></a></div>
-  </section>
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="about-layout">
+        <div class="about-intro">
+          <p class="eyebrow">คนที่ดูแลงานของคุณ</p>
+          <h2 id="about-title">Dave — IT Infrastructure &amp; Support</h2>
+          <p>Dave ดูแลงาน IT Support และผู้ใช้งานในสภาพแวดล้อมธุรกิจจริง รวมถึงการแก้ปัญหา Network และปรับงานข้อมูลด้วย Automation</p>
+          <p>เริ่มจากฟังปัญหา ตรวจอย่างเป็นขั้นตอน และอธิบายทางเลือกให้เข้าใจก่อนลงมือ เพื่อให้งานที่ส่งมอบดูแลต่อได้</p>
+          <a class="text-link" href="/contact">คุยกับ Dave <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="about-experience" aria-label="แนวทางและประสบการณ์">
+          <div><Icon name="monitor" /><span><strong>Support ผู้ใช้งาน</strong><small>คอมพิวเตอร์ โปรแกรม และปัญหาที่กระทบการทำงานประจำวัน</small></span></div>
+          <div><Icon name="network" /><span><strong>Network &amp; Infrastructure</strong><small>ตรวจปัญหาเครือข่ายและดูแลระบบที่ธุรกิจใช้งาน</small></span></div>
+          <div><Icon name="workflow" /><span><strong>Automation ที่ดูแลต่อได้</strong><small>ลดการทำข้อมูลซ้ำ พร้อมอธิบายขั้นตอนให้ทีมใช้งานต่อ</small></span></div>
+        </div>
+      </div>
+      <p class="about-area">พื้นที่ให้บริการ: คลองกิ่ว–บ้านบึง ชลบุรี และ Remote Support ตามลักษณะงาน</p>
+    </section>
 
-  <section class="section guides-section" aria-labelledby="guides-title">
-    <div class="section-heading"><div><p class="eyebrow">คู่มือจาก DaveDev Tech</p><h2 id="guides-title">เลือกอุปกรณ์และแก้ปัญหาได้มั่นใจขึ้น</h2></div><a class="text-link" href="/guides">อ่านคู่มือทั้งหมด <span aria-hidden="true">↗</span></a></div>
-    <div class="card-grid">{guides.map(g => <GuideCard title={g.data.title} description={g.data.description} category={g.data.category} readTime={g.data.readTime} href={`/guides/${g.id}`} />)}</div>
-  </section>
+    <section class="section guides-section" aria-labelledby="guides-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">บทความจาก DaveDev Tech</p><h2 id="guides-title">อ่านก่อนเลือกอุปกรณ์หรือแก้ปัญหา</h2></div>
+        <a class="text-link" href="/guides">อ่านบทความทั้งหมด <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="card-grid">{guides.map(g => <GuideCard title={g.data.title} description={g.data.description} category={g.data.category} readTime={g.data.readTime} href={`/guides/${g.id}`} />)}</div>
+    </section>
 
-  <CTA title="มีปัญหา IT อยู่ตอนนี้?" description="เล่าอาการ อุปกรณ์ และสิ่งที่อยากให้ช่วย เราจะเริ่มประเมินแนวทางให้ก่อนตกลงเริ่มงาน" />
+    <CTA homepage title="มีปัญหา IT ที่อยากให้ช่วยดู?" description="คอมพิวเตอร์มีปัญหา Network / Wi-Fi ใช้งานไม่เสถียร หรือต้องการลดงานซ้ำด้วย Automation โทรหรือส่งอีเมลมาเพื่อพูดคุยและประเมินปัญหาเบื้องต้น" />
+  </div>
 </BaseLayout>
