@@ -4,13 +4,13 @@
 
 - Production URL: https://davedevtech.davedevtech.workers.dev
 - Production platform: Cloudflare Workers Static Assets
-- Latest approved production feature commit: `4a1065adbe256188ceccdcdbe6cb94766feeb87f`
-- Commit subject: `feat: improve service detail conversion`
+- Latest approved production commit: `115ce0557065b13fcbbe4951941ccfb9dc852cad`
+- Commit subject: `fix: move contact actions styles to external css`
 - Cloudflare Worker: `davedevtech`
-- Cloudflare Workers production version: `b61692dc-abe8-40b1-b3c2-63a6c775822c`
-- Git state after Phase 06B push: `main` matched `origin/main`, ahead 0, behind 0, working tree clean.
+- Cloudflare Workers production version: `5a18e7f8-c11b-4668-b570-f65a1dfc6549`
+- Git state after Phase 08 fix push: `main` matched `origin/main`, ahead 0, behind 0, working tree clean.
 - Latest production configuration commit: `c900cc550cfef6152385b3635a1fa17d09f39237` (`fix: harden production site URL configuration`).
-- Latest Cloudflare Workers production version: `bf6327cc-175f-4aff-9fdb-e1824f13e29d`.
+- Phase 07 Cloudflare Workers production version: `bf6327cc-175f-4aff-9fdb-e1824f13e29d`.
 
 ## Frozen service information architecture
 
@@ -30,8 +30,9 @@ Infrastructure covers Server, VM/Virtualization, Storage, Backup, and Monitoring
 - **Phase 06A — Service IA: DONE / production.**
 - **Phase 06B — Service Detail Conversion: DONE / production.**
 - **Phase 06C — Proof / Case Studies: DONE / evidence audited / no website feature implementation required.** Phase 06C is CLOSED.
-- **Phase 06 overall: DONE.** The next action is to review the remaining roadmap/backlog and select the next highest-value phase; no next feature has been implemented.
-- **Phase 07 — Production Configuration Hardening: DONE / production; closure pending only this documentation checkpoint.**
+- **Phase 06 overall: DONE.** Its closure checkpoint preceded Phases 07 and 08.
+- **Phase 07 — Production Configuration Hardening: DONE / production / CLOSED.**
+- **Phase 08 — Conversion & Customer Journey Improvement: DONE / production / CLOSED.** Production acceptance is recorded at commit `115ce0557065b13fcbbe4951941ccfb9dc852cad`, Worker version `5a18e7f8-c11b-4668-b570-f65a1dfc6549`.
 
 ## Phase 06A completed work
 
@@ -145,6 +146,34 @@ Production QA passed for the Homepage, Services listing, all four Service Detail
 
 During command-line production QA, a request without a User-Agent received Cloudflare HTTP 403/1010. Requests using a normal browser User-Agent passed route and asset checks. This is an observation, not a confirmed defect; no specific Cloudflare rule is attributed, and it was not treated as a Phase 07 blocker.
 
+## Phase 08 — Conversion & Customer Journey Improvement
+
+Phase 08 is **CLOSED**. It added two focused conversion paths without changing Homepage IA or Service Detail behavior.
+
+### Frozen decisions and implementation
+
+- Contact phone is the primary action: `โทรปรึกษาปัญหา` → `tel:0822059652`. Email remains secondary as `เขียนอีเมลปรึกษา` with its existing prefilled `mailto:` behavior. The plain email, inquiry/preparation guidance, and sensitive-information guidance remain; no form was added.
+- The Home Networking guide links to Network & Wi-Fi at `/services/network/`. The SSD Upgrade guide links to IT Support at `/services/it-support/`. Mini PC / Home Lab intentionally has no Phase 08 service recommendation. No generic sales CTA was added to every guide.
+- Homepage and Service Detail remain unchanged. No analytics, contact data collection, custom-domain work, or case-study architecture was introduced.
+
+Feature commit: `f6b911f8ff8b5a2af6fc1f2d04dc72d4c18a42b0` (`feat: improve contact and guide conversion paths`); files: `src/pages/contact.astro`, `src/content/guides/home-networking-equipment.mdx`, and `src/content/guides/ssd-upgrade-guide.mdx`.
+
+The initial deployment succeeded but production QA failed because the Contact actions stayed side-by-side at 390px. The action rules were emitted inline by `contact.astro`, while production CSP allowed `style-src 'self'`. The cause was established from generated output, production behavior, and CSP configuration; no browser-console evidence is claimed.
+
+Corrective commit: `115ce0557065b13fcbbe4951941ccfb9dc852cad` (`fix: move contact actions styles to external css`); files: `src/pages/contact.astro` and `src/styles/global.css`. Contact action styles now use the existing same-origin stylesheet. The CSP and `public/_headers` were not changed; `style-src 'self'`, the 700px breakpoint, and 48px minimum action height remain.
+
+### Final production acceptance
+
+Worker: `davedevtech`; URL: https://davedevtech.davedevtech.workers.dev; accepted Wrangler version: `5a18e7f8-c11b-4668-b570-f65a1dfc6549`.
+
+- Production browser QA passed at `390×844`: phone appears above email, actions stack at about 350px wide and 48px high, computed `flex-direction` is `column`, no horizontal overflow was measured, labels were readable, phone remained primary and email secondary, the external stylesheet loaded, and no console errors were observed during this check.
+- Wider Contact QA passed at `768×1024`, `1024×768`, and `1440×900`; the actions remained in the wider row layout without horizontal overflow.
+- Contact phone/mail actions and guidance, both Guide-to-Service paths, and the Mini PC exclusion were verified. Requested production routes passed; a deliberate missing route returned a branded real HTTP 404.
+- Workers-host canonical/OG/robots/sitemap values, representative assets, and the security-header baseline passed. `style-src 'self'` remained in effect, and no `davedevtech.com` fallback was found. No new data collection was introduced.
+- `npm run check` passed with 0 errors, 0 warnings, and 0 hints; production build generated 12 pages. Three known non-fatal MDX/Rolldown `use astro:head-inject` warnings remain and are not a Phase 08 defect.
+
+Phase 08 is committed, pushed, deployed, and production-accepted. Its production application checkpoint is `115ce0557065b13fcbbe4951941ccfb9dc852cad`; this later context-documentation commit does not require another deployment.
+
 ### Resolved backlog and remaining roadmap
 
 Resolved P1 items:
@@ -154,9 +183,8 @@ Resolved P1 items:
 
 Remaining roadmap items, without selecting the next phase:
 
-- Guide-to-Service contextual linking and conversion.
+- Further Guide-to-Service contextual links only where editorially justified; Phase 08 added the approved Home Networking and SSD paths.
 - Additional useful Guide content.
-- Contact phone prominence.
 - Analytics and measurement decision.
 - Privacy/business-trust review if data collection changes.
 - Known MDX/Rolldown warnings.
@@ -166,4 +194,4 @@ Remaining roadmap items, without selecting the next phase:
 
 ## Immediate next action
 
-After Phase 07 closure, review the remaining P2 roadmap items and select the next highest-value workstream. No workstream is selected in this update; no next feature has been implemented.
+Review the remaining roadmap/backlog before selecting any further workstream. No subsequent phase or workstream is selected or started.
