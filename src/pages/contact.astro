@@ -14,10 +14,13 @@ const body = encodeURIComponent('ประเภทงาน/ปัญหา:\n�
   <section class="section contact-layout">
     <div class="contact-primary">
       <span class="contact-icon"><Icon name="email" /></span>
-      <p class="eyebrow">ติดต่อทางอีเมล</p>
-      <h2>ส่งรายละเอียดมาให้ Dave</h2>
-      <p>อีเมลจะเปิดพร้อมหัวข้อและรายการข้อมูลแนะนำ คุณแก้ไขข้อความและแนบรูปอาการได้ก่อนส่ง</p>
-      <a class="button button-primary" href={`mailto:${email}?subject=${subject}&body=${body}`}>เขียนอีเมลปรึกษา <span aria-hidden="true">↗</span></a>
+      <p class="eyebrow">ช่องทางติดต่อ</p>
+      <h2>เลือกช่องทางที่สะดวก</h2>
+      <p>โทรปรึกษาได้โดยตรง หรือส่งอีเมลที่เปิดพร้อมหัวข้อและรายการข้อมูลแนะนำ คุณแก้ไขข้อความและแนบรูปอาการได้ก่อนส่ง</p>
+      <div class="contact-actions">
+        <a class="button button-primary" href="tel:0822059652">โทรปรึกษาปัญหา</a>
+        <a class="button button-outline" href={`mailto:${email}?subject=${subject}&body=${body}`}>เขียนอีเมลปรึกษา <span aria-hidden="true">↗</span></a>
+      </div>
       <a class="contact-email" href={`mailto:${email}`}>{email}</a>
     </div>
     <aside class="contact-checklist">
@@ -34,3 +37,26 @@ const body = encodeURIComponent('ประเภทงาน/ปัญหา:\n�
   </section>
   <section class="contact-location" aria-label="พื้นที่ให้บริการ"><strong>พื้นที่ให้บริการ</strong><span>ชลบุรี · Remote support ตามลักษณะงาน</span></section>
 </BaseLayout>
+
+<style>
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .contact-actions .button {
+    min-height: 48px;
+  }
+
+  @media (max-width: 700px) {
+    .contact-actions {
+      flex-direction: column;
+    }
+
+    .contact-actions .button {
+      width: 100%;
+    }
+  }
+</style>
