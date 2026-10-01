@@ -9,6 +9,8 @@
 - Cloudflare Worker: `davedevtech`
 - Cloudflare Workers production version: `b61692dc-abe8-40b1-b3c2-63a6c775822c`
 - Git state after Phase 06B push: `main` matched `origin/main`, ahead 0, behind 0, working tree clean.
+- Latest production configuration commit: `c900cc550cfef6152385b3635a1fa17d09f39237` (`fix: harden production site URL configuration`).
+- Latest Cloudflare Workers production version: `bf6327cc-175f-4aff-9fdb-e1824f13e29d`.
 
 ## Frozen service information architecture
 
@@ -29,6 +31,7 @@ Infrastructure covers Server, VM/Virtualization, Storage, Backup, and Monitoring
 - **Phase 06B — Service Detail Conversion: DONE / production.**
 - **Phase 06C — Proof / Case Studies: DONE / evidence audited / no website feature implementation required.** Phase 06C is CLOSED.
 - **Phase 06 overall: DONE.** The next action is to review the remaining roadmap/backlog and select the next highest-value phase; no next feature has been implemented.
+- **Phase 07 — Production Configuration Hardening: DONE / production; closure pending only this documentation checkpoint.**
 
 ## Phase 06A completed work
 
@@ -112,6 +115,55 @@ Reconsider `/case-studies/` only when enough truthful, distinct, public-safe pro
 
 `/about/` and `/case-studies/` are not generated standalone routes and currently return HTTP 404 in production. Do not create them merely to match navigation terminology; Homepage sections may represent these concepts.
 
+## Phase 07 — Production Configuration Hardening
+
+Phase 07 addressed two verified P1 findings: the README still described Cloudflare Pages even though production uses Wrangler and Cloudflare Workers Static Assets; and `astro.config.mjs` silently fell back to `https://davedevtech.com` when `PUBLIC_SITE_URL` was absent. The repository did not establish ownership or configuration of that domain, so the fallback could publish incorrect canonical, Open Graph, sitemap, and robots host information. No ownership of `davedevtech.com` is claimed or assumed.
+
+### Implementation
+
+Only these files changed:
+
+- `astro.config.mjs`
+- `.env.example`
+- `README.md`
+
+`PUBLIC_SITE_URL` is required and has no implicit public-domain fallback. Missing or invalid values fail clearly. The value must be a valid absolute HTTP(S) origin: credentials, paths, query strings, and fragments are rejected. The validated origin is used as Astro's `site` origin.
+
+`.env.example` contains `PUBLIC_SITE_URL=http://localhost:4321`. The production build explicitly uses `PUBLIC_SITE_URL=https://davedevtech.davedevtech.workers.dev`. The README now documents the actual deployment flow: Astro static build → `dist/` → Wrangler → Cloudflare Workers Static Assets; Cloudflare Pages is no longer presented as the current deployment model.
+
+### Validation and production deployment
+
+Commit: `c900cc550cfef6152385b3635a1fa17d09f39237` — `fix: harden production site URL configuration`. It contains `.env.example`, `README.md`, and `astro.config.mjs`.
+
+Configuration checks rejected a missing `PUBLIC_SITE_URL` and invalid URL forms, with no silent `davedevtech.com` fallback. Accepted examples included `http://localhost:4321`, `https://davedevtech.davedevtech.workers.dev`, and a normal absolute HTTPS origin. `npm run check` passed with 0 errors, 0 warnings, and 0 hints; `npm run build` passed and generated 12 HTML pages. Internal link and fragment checks reported no broken links or fragments; `git diff --check` passed. Three existing non-blocking MDX/Rolldown `use astro:head-inject` warnings remain.
+
+The approved production build used `PUBLIC_SITE_URL=https://davedevtech.davedevtech.workers.dev`. Worker: `davedevtech`; production URL: https://davedevtech.davedevtech.workers.dev; deployed version: `bf6327cc-175f-4aff-9fdb-e1824f13e29d`. No custom domain was configured.
+
+Production QA passed for the Homepage, Services listing, all four Service Detail routes, Guides listing, all three current Guide articles, and Contact; each returned HTTP 200. `/about/`, `/case-studies/`, and a deliberately nonexistent test route returned real HTTP 404; the branded custom 404 remained functional. Canonical, `og:url`, absolute OG/Twitter image URLs, robots sitemap URL, and sitemap URLs used the Workers hostname. Checked live output contained no `davedevtech.com` fallback. LocalBusiness JSON-LD remained valid with existing business data; no `url` property was introduced. CSS, mobile-menu JavaScript, favicon, OG image, and all three self-hosted fonts returned successfully. Security headers and existing phone/email conversion actions remained present.
+
+### Operational observation
+
+During command-line production QA, a request without a User-Agent received Cloudflare HTTP 403/1010. Requests using a normal browser User-Agent passed route and asset checks. This is an observation, not a confirmed defect; no specific Cloudflare rule is attributed, and it was not treated as a Phase 07 blocker.
+
+### Resolved backlog and remaining roadmap
+
+Resolved P1 items:
+
+- Stale Cloudflare Pages deployment documentation.
+- Unsafe `PUBLIC_SITE_URL` fallback to `https://davedevtech.com`.
+
+Remaining roadmap items, without selecting the next phase:
+
+- Guide-to-Service contextual linking and conversion.
+- Additional useful Guide content.
+- Contact phone prominence.
+- Analytics and measurement decision.
+- Privacy/business-trust review if data collection changes.
+- Known MDX/Rolldown warnings.
+- Deferred branding/assets.
+- Custom domain only after ownership is verified.
+- Case studies only when sufficient evidence exists.
+
 ## Immediate next action
 
-Review the remaining DaveDev Tech roadmap/backlog and select the next highest-value phase after Phase 06C. No next feature has been selected or implemented yet.
+After Phase 07 closure, review the remaining P2 roadmap items and select the next highest-value workstream. No workstream is selected in this update; no next feature has been implemented.
