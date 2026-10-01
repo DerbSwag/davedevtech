@@ -27,8 +27,8 @@ Infrastructure covers Server, VM/Virtualization, Storage, Backup, and Monitoring
 
 - **Phase 06A — Service IA: DONE / production.**
 - **Phase 06B — Service Detail Conversion: DONE / production.**
-- **Phase 06 overall: IN PROGRESS.** Do not mark the full phase complete.
-- **Next: Phase 06C — Proof / Case Studies.** It has not started; begin with a read-only audit.
+- **Phase 06C — Proof / Case Studies: DONE / evidence audited / no website feature implementation required.** Phase 06C is CLOSED.
+- **Phase 06 overall: DONE.** The next action is to review the remaining roadmap/backlog and select the next highest-value phase; no next feature has been implemented.
 
 ## Phase 06A completed work
 
@@ -58,6 +58,41 @@ Expected routes returned HTTP 200. Canonical URLs and `og:url` used the Workers 
 
 The three existing MDX/Rolldown build warnings remain known, non-fatal technical debt.
 
+## Phase 06C closure — proof and evidence audit
+
+Phase 06C is **CLOSED**. The work focused on validating the existing proof and its public evidence; it intentionally produced no DaveDev Tech website feature-code changes.
+
+### Frozen proof architecture decision
+
+Keep the current architecture:
+
+- Compact Proof of Work on the Homepage.
+- Relevant optional proof inside Service Detail pages.
+- Centralized proof data in `src/lib/case-studies.ts`.
+
+Do not create a `/case-studies/` index, individual case-study routes, a proof-specific slug or SEO model, a screenshot/media model, or a multiple-proof-per-service model at this stage. The two truthful, compact examples do not justify dedicated routes without creating thin or duplicated content.
+
+### Current proof inventory
+
+- **Network & Wi-Fi** — `network-troubleshooting`; a troubleshooting-method example shown on the Homepage and Network Service Detail. It is not presented as a customer-result case study.
+- **Workflow Automation** — `attendance-workflow`; a workflow/tool example shown on the Homepage and Automation Service Detail. Its public artifact is [DerbSwag/factory_demo](https://github.com/DerbSwag/factory_demo). It is not presented as a deployed customer-result case study.
+- **IT Support** — no proof assigned, intentionally.
+- **Infrastructure** — no proof assigned, intentionally.
+
+### factory_demo evidence audit and documentation polish
+
+The public `DerbSwag/factory_demo` portfolio/demo repository was reviewed. The artifact uses Python/Tkinter, synthetic/mock attendance data, department filtering, attendance-status and OT processing, and Excel export. The reviewed repository provides no evidence of customer production deployment. The current DaveDev Tech proof wording is appropriate as a demo/tool example; no website proof correction is currently required.
+
+The review identified no customer/company data, real employee records, credentials, private IP addresses, or other known sensitive operational information in the reviewed artifact. This was a scoped public-safety review, not a formal security audit.
+
+The repository's documentation-only maintenance commit is `b4f77affb82eaf244b8836b1213fa32a541f151f` (`docs: fix application run command`). `RUNBOOK.md` was corrected from `python main.py` to `python factory_demo.py`. Dependencies were installed from the existing requirements, 12 tests were collected and all 12 passed, README and RUNBOOK entry points agree, and the public `origin/main` contains the corrected command.
+
+Non-blocking factory_demo backlog: pytest is used/documented but is not declared in `requirements.txt`; the README screenshot section remains a placeholder with no screenshots. These items were intentionally not expanded during Phase 06C.
+
+### Future case-study trigger
+
+Reconsider `/case-studies/` only when enough truthful, distinct, public-safe proof content exists. Individual detail routes require a verified narrative, unique content beyond the Homepage and Service Detail summaries, public-safe facts, and reviewed media if used. Do not fabricate customer outcomes or metrics. IT Support and Infrastructure do not need invented proof for symmetry.
+
 ## Phase 06B completed work
 
 - Reworked all four service detail pages through the shared, data-driven `ServiceDetail` renderer.
@@ -79,10 +114,4 @@ The three existing MDX/Rolldown build warnings remain known, non-fatal technical
 
 ## Immediate next action
 
-Begin **PHASE 06C — Proof / Case Studies** with a read-only audit. Phase 06C design and implementation have not started.
-
-Expected workflow:
-
-`AUDIT → REVIEW → FREEZE DECISION → IMPLEMENT → VALIDATE → BROWSER QA → REVIEW DIFF → LOCAL COMMIT → PUSH → DEPLOY → PRODUCTION QA`
-
-Preserve the established review gates and do not skip ahead without approval.
+Review the remaining DaveDev Tech roadmap/backlog and select the next highest-value phase after Phase 06C. No next feature has been selected or implemented yet.
