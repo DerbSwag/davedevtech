@@ -4,11 +4,12 @@
 
 - Production URL: https://davedevtech.davedevtech.workers.dev
 - Production platform: Cloudflare Workers Static Assets
-- Latest approved production commit: `115ce0557065b13fcbbe4951941ccfb9dc852cad`
-- Commit subject: `fix: move contact actions styles to external css`
+- Latest approved production application commit: `09d524fde684751cc1d180158c819ae8e2731487`
+- Commit subject: `feat: refresh brand and social assets`
 - Cloudflare Worker: `davedevtech`
-- Cloudflare Workers production version: `5a18e7f8-c11b-4668-b570-f65a1dfc6549`
-- Git state after Phase 08 fix push: `main` matched `origin/main`, ahead 0, behind 0, working tree clean.
+- Cloudflare Workers production version: `e89d15b9-4b09-40b3-8860-9105d8ea0bd3`
+- Phase 09 production application checkpoint: `09d524fde684751cc1d180158c819ae8e2731487`; Phase 08 production acceptance remains documented below at `115ce0557065b13fcbbe4951941ccfb9dc852cad`.
+- Git state at the Phase 09 application checkpoint: `main` matched `origin/main`, ahead 0, behind 0, working tree clean.
 - Latest production configuration commit: `c900cc550cfef6152385b3635a1fa17d09f39237` (`fix: harden production site URL configuration`).
 - Phase 07 Cloudflare Workers production version: `bf6327cc-175f-4aff-9fdb-e1824f13e29d`.
 
@@ -33,6 +34,7 @@ Infrastructure covers Server, VM/Virtualization, Storage, Backup, and Monitoring
 - **Phase 06 overall: DONE.** Its closure checkpoint preceded Phases 07 and 08.
 - **Phase 07 — Production Configuration Hardening: DONE / production / CLOSED.**
 - **Phase 08 — Conversion & Customer Journey Improvement: DONE / production / CLOSED.** Production acceptance is recorded at commit `115ce0557065b13fcbbe4951941ccfb9dc852cad`, Worker version `5a18e7f8-c11b-4668-b570-f65a1dfc6549`.
+- **Phase 09 — Brand & Social Presentation Refinement: CLOSED / production accepted.** Production application commit `09d524fde684751cc1d180158c819ae8e2731487`; Worker version `e89d15b9-4b09-40b3-8860-9105d8ea0bd3`.
 
 ## Phase 06A completed work
 
@@ -192,6 +194,50 @@ Remaining roadmap items, without selecting the next phase:
 - Custom domain only after ownership is verified.
 - Case studies only when sufficient evidence exists.
 
+## Phase 09 — Brand & Social Presentation Refinement
+
+Phase 09 is **CLOSED / production accepted**. The work aligned the favicon and social preview artwork with the approved V2 brand presentation without changing site architecture or content.
+
+### Review decision and implementation
+
+The audit found legacy V1 Mint/Navy styling in `public/favicon.svg` and the Open Graph artwork, plus stale Open Graph image alt text in `src/layouts/BaseLayout.astro`. The approved implementation changed only:
+
+- `public/favicon.svg`
+- `public/og-image.svg`
+- `public/og-image.png`
+- `src/layouts/BaseLayout.astro`
+
+The favicon retains its 48×48 SVG structure, rounded-square composition, and recognizable D mark; its background is Tech Blue `#2563EB` and its mark is white `#FFFFFF`. No ICO, Apple Touch Icon, or manifest was added.
+
+The same-origin Open Graph image remains 1200×630 and uses the approved V2 palette without legacy Mint/Navy styling. Its content is:
+
+> DAVEDEV TECH
+> Computer Support & IT Services
+> IT Support • Network & Wi-Fi
+> Automation • Infrastructure
+> Chon Buri • Remote Support
+
+The image alt text is `DaveDev Tech — Computer Support & IT Services`. No runtime dependency was introduced.
+
+Application commit: `09d524fde684751cc1d180158c819ae8e2731487` — `feat: refresh brand and social assets`.
+
+### Validation and production acceptance
+
+Validation passed: `npm.cmd run check` reported 0 errors, 0 warnings, and 0 hints; `npm.cmd run build` succeeded with 12 generated pages; and `git diff --check` passed. Three existing non-fatal MDX/Rolldown `use astro:head-inject` warnings remain deferred and were not introduced by Phase 09.
+
+Production Worker: `davedevtech`; URL: https://davedevtech.davedevtech.workers.dev; accepted Worker version: `e89d15b9-4b09-40b3-8860-9105d8ea0bd3`.
+
+Live production QA passed:
+
+- `/`, `/services/`, `/contact/`, and `/guides/home-networking-equipment/` returned HTTP 200. A deliberate missing route returned a real HTTP 404 with the branded custom 404 page.
+- `/favicon.svg` returned HTTP 200 as `image/svg+xml`; its Tech Blue background and white D rendered correctly, with no legacy Mint branding.
+- `/og-image.png` returned HTTP 200 as `image/png`, measured 1200×630, and its live SHA-256 matched the validated local build. Full-size and reduced previews passed with readable, unclipped approved copy and no stale Mint styling.
+- Homepage, representative Service, and Guide metadata retained Workers-host canonical, `og:url`, `og:image`, and `twitter:image` values with the updated alt text. No active `https://davedevtech.com` reference was found.
+- The security baseline remained present, including CSP `style-src 'self'`. Responsive production QA passed at `390×844` and `1440×900` for Homepage and Contact; Contact actions stacked on mobile and remained side by side at desktop width. No production-site console errors were observed; one `edreader-main.js` error came from a Chrome extension and was external to the site.
+- Representative hashed CSS and mobile-menu JavaScript returned HTTP 200. No Phase 09 production defect was discovered.
+
+Phase 09 did not change Homepage or Service IA, Contact conversion, Guide architecture, analytics or privacy architecture, `PUBLIC_SITE_URL`, canonical logic, sitemap, robots, CSP/security headers, custom-domain configuration, Cloudflare deployment architecture, font architecture, or MDX warning handling. Production identity remains `https://davedevtech.davedevtech.workers.dev`; ownership of `davedevtech.com` is not assumed.
+
 ## Immediate next action
 
-Review the remaining roadmap/backlog before selecting any further workstream. No subsequent phase or workstream is selected or started.
+Review the remaining roadmap/backlog before selecting any further workstream. Do not select or begin Phase 10 automatically; no subsequent phase or workstream has been selected or started.
