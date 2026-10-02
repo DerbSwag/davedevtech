@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#f7f8fa"/><circle cx="945" cy="315" r="300" fill="#e4f4ef"/><circle cx="945" cy="315" r="215" fill="none" stroke="#c4e6dc" stroke-width="2"/><rect x="852" y="222" width="186" height="186" rx="38" fill="#102c36" transform="rotate(-7 945 315)"/><text x="945" y="329" text-anchor="middle" font-family="system-ui,sans-serif" font-size="72" font-weight="700" fill="#fff">DD</text><text x="84" y="180" font-family="system-ui,sans-serif" font-size="25" font-weight="700" letter-spacing="4" fill="#118d78">DAVEDEV TECH</text><text x="84" y="274" font-family="system-ui,sans-serif" font-size="51" font-weight="700" fill="#10202b">IT Support, Automation</text><text x="84" y="342" font-family="system-ui,sans-serif" font-size="51" font-weight="700" fill="#10202b">&amp; Tech Solutions</text><text x="84" y="425" font-family="system-ui,sans-serif" font-size="25" fill="#62717a">เทคโนโลยีที่ช่วยให้งานเดินหน้า</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <text x="88" y="145" font-family="IBM Plex Sans Thai, IBM Plex Sans, system-ui, sans-serif" font-size="28" font-weight="700" letter-spacing="3" fill="#2563EB">DAVEDEV TECH</text>
+  <text x="88" y="255" font-family="IBM Plex Sans Thai, IBM Plex Sans, system-ui, sans-serif" font-size="58" font-weight="700" fill="#0F172A">Computer Support</text>
+  <text x="88" y="325" font-family="IBM Plex Sans Thai, IBM Plex Sans, system-ui, sans-serif" font-size="58" font-weight="700" fill="#0F172A">&amp; IT Services</text>
+  <text x="88" y="415" font-family="IBM Plex Sans Thai, IBM Plex Sans, system-ui, sans-serif" font-size="27" font-weight="600" fill="#0F172A">IT Support • Network &amp; Wi-Fi</text>
+  <text x="88" y="460" font-family="IBM Plex Sans Thai, IBM Plex Sans, system-ui, sans-serif" font-size="27" font-weight="600" fill="#0F172A">Automation • Infrastructure</text>
+  <text x="88" y="540" font-family="IBM Plex Sans Thai, IBM Plex Sans, system-ui, sans-serif" font-size="25" fill="#475569">Chon Buri • Remote Support</text>
+  <rect x="850" y="173" width="240" height="240" rx="48" fill="#2563EB"/>
+  <path d="M14 10h11c10 0 16 5 16 14S35 38 25 38H14zm9 21h2c5 0 8-2 8-7s-3-7-8-7h-2z" transform="translate(786 134) scale(6.7)" fill="#FFFFFF"/>
+</svg>
